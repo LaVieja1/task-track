@@ -19,7 +19,7 @@ export const Logo = () => {
             headingFont.className
           )}
         >
-          Tast Track
+          Tast-Track
         </p>
       </div>
     </Link>
