@@ -1,7 +1,8 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { esES } from "@clerk/localizations";
 
 const PlatformLayout = ({ children }: { children: React.ReactNode }) => {
-  return <ClerkProvider>{children}</ClerkProvider>;
+  return <ClerkProvider localization={esES}>{children}</ClerkProvider>;
 };
 
 export default PlatformLayout;
