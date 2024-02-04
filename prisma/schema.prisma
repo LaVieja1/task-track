@@ -15,7 +15,7 @@ model Board {
   id              String @id @default(uuid())
   orgId           String
   title           String
-  imageID         String
+  imageId         String
   imageThumbUrl   String @db.String(200)
   imageFullUrl    String @db.String(200)
   imageUserName   String @db.String(200)
