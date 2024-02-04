@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "cockroachdb"
+  provider = "mysql"
   url      = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -16,10 +16,10 @@ model Board {
   orgId           String
   title           String
   imageId         String
-  imageThumbUrl   String @db.String(200)
-  imageFullUrl    String @db.String(200)
-  imageUserName   String @db.String(200)
-  imageLinkHTML   String @db.String(200)
+  imageThumbUrl   String @db.Text
+  imageFullUrl    String @db.Text
+  imageUserName   String @db.Text
+  imageLinkHTML   String @db.Text
   
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
