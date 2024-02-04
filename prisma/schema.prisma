@@ -12,7 +12,15 @@ datasource db {
 }
 
 model Board {
-  id String @id @default(uuid())
-
-  title String
+  id              String @id @default(uuid())
+  orgId           String
+  title           String
+  imageID         String
+  imageThumbUrl   String @db.String(200)
+  imageFullUrl    String @db.String(200)
+  imageUserName   String @db.String(200)
+  imageLinkHTML   String @db.String(200)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
