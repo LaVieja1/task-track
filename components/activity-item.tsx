@@ -4,11 +4,11 @@ import { AuditLog } from "@prisma/client";
 import { generateLogMessage } from "@/lib/generate-log-message";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
-interface AcitivityItemProps {
+interface ActivityItemProps {
   data: AuditLog;
 }
 
-export const AcitivityItem = ({ data }: AcitivityItemProps) => {
+export const ActivityItem = ({ data }: ActivityItemProps) => {
   return (
     <li className="flex items-center gap-x-2">
       <Avatar className="h-8 w-8">
