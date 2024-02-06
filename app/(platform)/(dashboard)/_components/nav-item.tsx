@@ -53,7 +53,7 @@ export const NavItem = ({
       href: `/organization/${organization.id}/settings`,
     },
     {
-      label: "Precios",
+      label: "Facturación",
       icon: <CreditCard className="h-4 w-4 mr-2" />,
       href: `/organization/${organization.id}/billing`,
     },
