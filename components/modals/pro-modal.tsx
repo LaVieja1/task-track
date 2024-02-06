@@ -1,14 +1,30 @@
 "use client";
 
+import { toast } from "sonner";
 import Image from "next/image";
 
+import { stripeRedirect } from "@/actions/stripe-redirect";
 import { useProModal } from "@/hooks/use-pro-modal";
+import { useAction } from "@/hooks/use-action";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 export const ProModal = () => {
   const proModal = useProModal();
+
+  const { execute, isLoading } = useAction(stripeRedirect, {
+    onSuccess: (data) => {
+      window.location.href = data;
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
+  const onClick = () => {
+    execute({});
+  };
 
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
@@ -31,7 +47,12 @@ export const ProModal = () => {
               <li>Y mas!</li>
             </ul>
           </div>
-          <Button className="w-full" variant="primary">
+          <Button
+            onClick={onClick}
+            disabled={isLoading}
+            className="w-full"
+            variant="primary"
+          >
             Mejorar
           </Button>
         </div>
