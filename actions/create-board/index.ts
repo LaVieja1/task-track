@@ -7,6 +7,7 @@ import { ACTION, ENTITY_TYPE } from "@prisma/client";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { db } from "@/lib/db";
 import { createSafeAction } from "@/lib/create-safe-action";
+import { incrementAvailableCount, hasAvailableCount } from "@/lib/org-limit";
 
 import { InputType, ReturnType } from "./types";
 import { CreateBoard } from "./schema";
@@ -17,6 +18,15 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   if (!userId || !orgId) {
     return {
       error: "Sin autorización",
+    };
+  }
+
+  const canCreate = await hasAvailableCount();
+
+  if (!canCreate) {
+    return {
+      error:
+        "Alcanzaste el límite de tableros gratis. Por favor, mejoré su plan para crear más.",
     };
   }
 
@@ -51,6 +61,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         imageUserName,
       },
     });
+
+    await incrementAvailableCount();
 
     await createAuditLog({
       entityTitle: board.title,
